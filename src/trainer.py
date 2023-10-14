@@ -1,17 +1,16 @@
-import torchvision.datasets as datasets
+from typing import Tuple, List, Union, Dict
 from torchvision import transforms, models
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, Dataset
 import torch
 from torch import optim
+import numpy as np
+from PIL import Image
 import os
 from time import sleep
-import torch.nn.functional as F
 import torch.nn as nn
 from sklearn.model_selection import StratifiedShuffleSplit
-from multiprocessing import Process, Manager
 from torch.utils.data import Subset
 from sklearn.model_selection import train_test_split
-from torch.utils.data import DataLoader
 from tqdm import tqdm
 import wandb
 import logging
@@ -19,13 +18,23 @@ from data.screenings import ResnetDataset
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, confusion_matrix, roc_curve
 
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s, %(message)s",datefmt='%Y-%m-%d %H:%M:%S', filename="./logs/logs.log")
+# Configure logging
+logging.basicConfig(level=logging.INFO, format="%(asctime)s, %(message)s", datefmt='%Y-%m-%d %H:%M:%S', filename="./logs/logs.log")
 logger = logging.getLogger()
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(device)
 
-def not_stratified_train_val_dataset(dataset, val_split=0.15):
+def not_stratified_train_val_dataset(dataset: Dataset, val_split: float = 0.2) -> Dict[str, Dataset]:
+    """
+    Split a dataset into training and validation sets, without stratification.
 
+    Args:
+        dataset (Dataset): The dataset to split.
+        val_split (float): The fraction of data to put in the validation set.
+
+    Returns:
+        dict: A dictionary with 'train' and 'val' keys, containing training and validation subsets.
+    """
     train_idx, val_idx = train_test_split(list(range(len(dataset))), test_size=val_split)
     datasets = {}
     datasets['train'] = Subset(dataset, train_idx)
@@ -33,9 +42,21 @@ def not_stratified_train_val_dataset(dataset, val_split=0.15):
     return datasets
 
 
-def train_val_dataset(dataset, train_ratio=0.7, val_ratio=0.2, test_ratio=0.1, random_state=42):
+def train_val_dataset(dataset: Dataset, train_ratio: float = 0.7, val_ratio: float = 0.2, test_ratio: float = 0.1, random_state: int = 42) -> Dict[str, Dataset]:
+    """
+    Split a dataset into training and validation sets with stratified sampling.
+
+    Args:
+        dataset (Dataset): The dataset to split.
+        train_ratio (float): The fraction of data to put in the training set.
+        val_ratio (float): The fraction of data to put in the validation set.
+        test_ratio (float): The fraction of data to put in the test set.
+        random_state (int): The random seed for reproducibility.
+
+    Returns:
+        dict: A dictionary with 'train' and 'val' keys, containing training and validation subsets.
+    """
     
-    import numpy as np
     # labels = [dataset[i][1] for i in range(len(dataset))]
     print('start stratifying 0')
     data_array = np.array(dataset)
@@ -114,19 +135,25 @@ class Trainer:
         self.model= self.model.to(device)
 
     def train(self):
+        """
+        Train the model.
+        """
         logger.info(f"Started training")
         for epoch in range(self.n_epochs):
             self.run_epoch(epoch)
             self.validate(epoch)
-            # Save the model at the best epoch
-            # if self.best_model_state is not None:
-            #     self.save_model("./model", self.best_model_state, epoch)
+            
         logger.info(f"Finished training")
         logger.info(f"Exporting model")
-        # self.save_model("./model", self.model, epoch)
+        
 
-    def run_epoch(self, epoch):
-    
+    def run_epoch(self, epoch: int):
+        """
+        Run one training epoch.
+
+        Args:
+            epoch (int): The current epoch.
+        """
         self.model.train()
         with tqdm(self.train_dataloader, unit="batch") as tepoch:
             for i, (inputs, labels) in enumerate(tepoch, 0):
@@ -158,6 +185,12 @@ class Trainer:
 
 
     def validate(self, epoch):
+        """
+        Perform model validation.
+
+        Args:
+            epoch (int): The current epoch.
+        """
         cumulative_loss = []    
         for i, (inputs, labels) in enumerate(self.val_dataloader, 0):
             self.model.eval()
@@ -196,13 +229,29 @@ class Trainer:
             # TODO save model as artifact in wandb
 
 
-def load_model(model, model_path):
+def load_model(model: nn.Module, model_path: str) -> None:
+    """
+    Load model weights and set the model to evaluation.
+
+    Args:
+        model (nn.Module): The PyTorch model to load weights into.
+        model_path (str): The path to the model weights.
+    """
     state_dict = torch.load(model_path)
     model.load_state_dict(state_dict)
     model.eval()
 
 
-def evaluate_model(options):
+def evaluate_model(options) -> Tuple[float, float, float, float, float]:
+    """
+    Evaluate a model's performance on a test dataset.
+
+    Args:
+        options: Network options.
+
+    Returns:
+        Tuple[float, float, float, float, float]: A tuple containing accuracy, precision, recall, F1 score, and AUC score.
+    """
 
     data_path = options.data_path
     test_data_csv_path = options.test_data_csv_path
@@ -257,7 +306,7 @@ def evaluate_model(options):
     # log confusion matrix
     wandb.log({"Confusion Matrix": wandb.plot.confusion_matrix(probs=None, y_true=all_labels, preds=all_predictions)})
 
-    # Log the ROC curve
+    # ROC curve
     fpr, tpr, thresholds = roc_curve(all_labels, all_probabilities)
     roc_curve_data = wandb.Table(data=list(zip(fpr, tpr, thresholds)), columns=["fpr", "tpr", "thresholds"])
 
@@ -268,9 +317,17 @@ def evaluate_model(options):
     return accuracy, precision, recall, f1, auc
 
 
-def infer_model(options):
-    # Load the saved model
-    from PIL import Image
+def infer_model(options) -> Tuple[int, List[float]]:
+    """
+    Perform inference on an image using a pre-trained model.
+
+    Args:
+        options (NetworkOptions): An object containing various network options.
+        image_path (str): The path to the input image for inference.
+
+    Returns:
+        Tuple[int, List[float]]: A tuple containing the predicted class and class probabilities.
+    """
     
 
     image_path = options.image_path
