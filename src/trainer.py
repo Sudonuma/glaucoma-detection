@@ -90,7 +90,7 @@ class Trainer:
         # TODO Perform stratified train-validation-test split
         
         
-        data_split = train_val_dataset(self.dataset)
+        data_split = not_stratified_train_val_dataset(self.dataset)
 
 
         self.train_dataloader = DataLoader(data_split['train'],
