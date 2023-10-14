@@ -215,17 +215,18 @@ class Trainer:
             self.best_val_loss = average_running_loss
             # Save the model state at the best epoch
             self.best_model_state = self.model.state_dict()
-            self.save_model("./model", self.best_model_state, epoch)
+            self.save_model(self.best_model_state, epoch)
 
 
-    def save_model(self, save_path, model, epoch):
+    def save_model(self, model, epoch):
             """Save model weights of best epoch to disk
             """
-            # save_folder = os.path.join(save_path, "models", f"{model_name}.pth")
-            # if not os.path.exists(save_folder):
-            #     os.makedirs(save_folder)
-            save_path = os.path.join(save_path, f"modelWeights.pth")
-            torch.save(model, save_path)
+            model_folder = os.path.join(os.getcwd(), "model")
+            if not os.path.exists(model_folder):
+                os.makedirs(model_folder)
+
+            model_filename = os.path.join(model_folder, f"modelWeights.pth")
+            torch.save(model, model_filename)
             # TODO save model as artifact in wandb
 
 
