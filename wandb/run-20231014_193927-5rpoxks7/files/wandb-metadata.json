@@ -1,0 +1,128 @@
+{
+    "os": "Linux-5.15.0-86-generic-x86_64-with-glibc2.31",
+    "python": "3.9.18",
+    "heartbeatAt": "2023-10-14T17:39:28.541682",
+    "startedAt": "2023-10-14T17:39:27.709146",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/sudonuma/Documents/MLCodingChallenge/src/train.py",
+    "codePathLocal": "src/train.py",
+    "codePath": "src/train.py",
+    "git": {
+        "remote": "https://github.com/Sudonuma/MLCodingChallenge.git",
+        "commit": "f4b0ca309a13adfe034dc3439e20d49ca51442a1"
+    },
+    "email": "tasnim.hd@gmail.com",
+    "root": "/home/sudonuma/Documents/MLCodingChallenge",
+    "host": "nezuko",
+    "username": "sudonuma",
+    "executable": "/home/sudonuma/anaconda3/envs/glaucoma/bin/python",
+    "cpu_count": 8,
+    "cpu_count_logical": 16,
+    "cpu_freq": {
+        "current": 2289.0496875,
+        "min": 800.0,
+        "max": 5000.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2200.0,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 2200.0,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 2200.0,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 2200.0,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 2200.0,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 3931.059,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 2200.0,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 2200.0,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 2200.0,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 2200.0,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 2200.0,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 2200.0,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 2200.0,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 2200.0,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 2200.0,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 2200.0,
+            "min": 800.0,
+            "max": 5000.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 309.15778732299805,
+            "used": 270.4669494628906
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 3060 Laptop GPU",
+            "memory_total": 6235422720
+        }
+    ],
+    "memory": {
+        "total": 15.393760681152344
+    }
+}

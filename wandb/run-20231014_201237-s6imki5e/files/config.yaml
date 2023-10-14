@@ -1,0 +1,93 @@
+wandb_version: 1
+
+_wandb:
+  desc: null
+  value:
+    python_version: 3.9.18
+    cli_version: 0.15.12
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: true
+    start_time: 1697307157.943002
+    t:
+      1:
+      - 1
+      - 5
+      - 41
+      - 53
+      - 55
+      2:
+      - 1
+      - 5
+      - 41
+      - 53
+      - 55
+      3:
+      - 23
+      4: 3.9.18
+      5: 0.15.12
+      8:
+      - 2
+      - 5
+      13: linux-x86_64
+    visualize:
+      Confusion Matrix:
+        panel_type: Vega2
+        panel_config:
+          panelDefId: wandb/confusion_matrix/v1
+          fieldSettings:
+            Actual: Actual
+            Predicted: Predicted
+            nPredictions: nPredictions
+          stringSettings:
+            title: ''
+          transform:
+            name: tableWithLeafColNames
+          userQuery:
+            queryFields:
+            - name: runSets
+              args:
+              - name: runSets
+                value: ${runSets}
+              fields:
+              - name: id
+                fields: []
+              - name: name
+                fields: []
+              - name: _defaultColorIndex
+                fields: []
+              - name: summaryTable
+                args:
+                - name: tableKey
+                  value: Confusion Matrix_table
+                fields: []
+      ROC Curve:
+        panel_type: Vega2
+        panel_config:
+          panelDefId: wandb/line/v0
+          fieldSettings:
+            x: fpr
+            y: tpr
+            stroke: null
+          stringSettings:
+            title: ROC Curve
+          transform:
+            name: tableWithLeafColNames
+          userQuery:
+            queryFields:
+            - name: runSets
+              args:
+              - name: runSets
+                value: ${runSets}
+              fields:
+              - name: id
+                fields: []
+              - name: name
+                fields: []
+              - name: _defaultColorIndex
+                fields: []
+              - name: summaryTable
+                args:
+                - name: tableKey
+                  value: ROC Curve_table
+                fields: []

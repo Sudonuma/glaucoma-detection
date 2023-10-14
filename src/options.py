@@ -50,7 +50,7 @@ class NetworkOptions:
         self.parser.add_argument("--num_epochs",
                                  type=int,
                                  help="number of epochs",
-                                 default=5)
+                                 default=2)
 
     def parse(self):
         self.options = self.parser.parse_args()
