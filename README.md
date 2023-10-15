@@ -11,6 +11,7 @@ Welcome to the Glaucoma Challenge repository. This repository contains the code 
 - [Usage](#usage)
 - [data](#data)
 - [CSV](#CSV)
+- [TODO](#TODO)
 
 
 ## Prerequisites
@@ -61,6 +62,7 @@ Additionally, to facilitate code testing for other users, we included two CSV fi
 
 If you want to train on the balanced data, you can utilize the `reduced_encoded_train_data.csv` and `reduced_encoded_test_data.csv` files.
 
+The data is split 70% for training, 20% validation and 10% for model evaluation (testing).
 
 ## CSV
 
@@ -69,8 +71,15 @@ If you want to train on the balanced data, you can utilize the `reduced_encoded_
 3. To train the model on Downsampled but not well balanced data use: `13ktrain_data.csv` and `13ktest_data.csv`
 4. `dummy_train_data.csv` and `dummy_test_data.csv` are just for the purpose to run the code.
 
+## TODO
 
-
+1. csv files should be tracked with DVC.
+2. Improve the EDA and the pre-processing step.
+3. Test the output of the model.
+4. Add more tests.
+5. Optimise the stratfied sampling.
+6. Use Siamese Neural Networks as it is robust against unbalanced.
+7. Lint.
 
 
 
