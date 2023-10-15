@@ -14,13 +14,10 @@ from sklearn.model_selection import train_test_split
 from tqdm import tqdm
 import wandb
 import logging
-from data.screenings import ResnetDataset
+from src.data.screenings import ResnetDataset
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, confusion_matrix, roc_curve
 
 
-# Configure logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s, %(message)s", datefmt='%Y-%m-%d %H:%M:%S', filename="./logs/logs.log")
-logger = logging.getLogger()
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(device)
 
@@ -82,7 +79,7 @@ def train_val_dataset(dataset: Dataset, train_ratio: float = 0.7, val_ratio: flo
     return datasets
 
 class Trainer:
-    def __init__(self, options):
+    def __init__(self, options, logger):
         self.opt = options
         self.model = models.resnet50(pretrained=True) # change this to device
         self.n_epochs = self.opt.num_epochs
@@ -92,6 +89,7 @@ class Trainer:
         self.data_csv_path = self.opt.data_csv_path
         self.best_val_loss = float('inf')
         self.best_model_state = None
+        self.logger = logger
 
 
         self.transformation = transforms.Compose([
@@ -138,13 +136,13 @@ class Trainer:
         """
         Train the model.
         """
-        logger.info(f"Started training")
+        self.logger.info(f"Started training")
         for epoch in range(self.n_epochs):
             self.run_epoch(epoch)
             self.validate(epoch)
             
-        logger.info(f"Finished training")
-        logger.info(f"Exporting model")
+        self.logger.info(f"Finished training")
+        self.logger.info(f"Exporting model")
         
 
     def run_epoch(self, epoch: int):
@@ -243,7 +241,7 @@ def load_model(model: nn.Module, model_path: str) -> None:
     model.eval()
 
 
-def evaluate_model(options) -> Tuple[float, float, float, float, float]:
+def evaluate_model(options, logger) -> Tuple[float, float, float, float, float]:
     """
     Evaluate a model's performance on a test dataset.
 
@@ -303,7 +301,7 @@ def evaluate_model(options) -> Tuple[float, float, float, float, float]:
 
     # log metrics to wandb
     wandb.log({"AUC score": auc, "F1 Score": f1, "Accuracy": accuracy, "Precision": precision, "Recall": recall})
-    
+    logger.info(f"AUC score: {auc}, F1 Score: {f1}, Accuracy: {accuracy}, Precision: {precision}, Recall: {recall}")
     # log confusion matrix
     wandb.log({"Confusion Matrix": wandb.plot.confusion_matrix(probs=None, y_true=all_labels, preds=all_predictions)})
 
@@ -318,7 +316,7 @@ def evaluate_model(options) -> Tuple[float, float, float, float, float]:
     return accuracy, precision, recall, f1, auc
 
 
-def infer_model(options) -> Tuple[int, List[float]]:
+def infer_model(options, logger) -> Tuple[int, List[float]]:
     """
     Perform inference on an image using a pre-trained model.
 
@@ -364,7 +362,7 @@ def infer_model(options) -> Tuple[int, List[float]]:
 
     # class probabilities
     class_probabilities = torch.softmax(output, dim=1).squeeze().tolist()
-
+    logger.info(f"predicted_class {predicted_class}, class_probabilities{class_probabilities}")
     return predicted_class, class_probabilities
 
 # for testing

@@ -1,8 +1,6 @@
-import wandb
-from options import NetworkOptions
-from trainer import Trainer
+from src.trainer import Trainer
 
-def main() -> None:
+def train(options, logger) -> None:
     """
     Main function for training a glaucoma detection model.
 
@@ -11,13 +9,10 @@ def main() -> None:
     Returns:
         None
     """
-    
-    options = NetworkOptions()
-    opts = options.parse()
 
-    wandb.init(project="glaucoma", entity="sudonuma")
-    trainer = Trainer(opts)
+    
+    trainer = Trainer(options, logger)
     trainer.train()
 
 if __name__ == "__main__":
-    main()
+    train()
