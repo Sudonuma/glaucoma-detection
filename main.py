@@ -18,26 +18,24 @@ def main():
 
     log_formatter = logging.Formatter("%(asctime)s, %(message)s", datefmt='%Y-%m-%d %H:%M:%S')
     
-    #Setup File handler
+    # Setup File handler
     file_handler = logging.FileHandler('./logs/logs.log')
     file_handler.setFormatter(log_formatter)
     file_handler.setLevel(logging.INFO)
 
-    #Setup Stream Handler (i.e. console)
+    # Setup Stream Handler
     stream_handler = logging.StreamHandler()
     stream_handler.setFormatter(log_formatter)
     stream_handler.setLevel(logging.INFO)
 
-    #Get our logger
+    # Get our logger
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
 
-    #Add both Handlers
+    # Add both Handlers
     logger.addHandler(file_handler)
     logger.addHandler(stream_handler)
 
-    
-    
     # parse options
     options = NetworkOptions()
     opts = options.parse()
@@ -58,8 +56,6 @@ def main():
 
     # Infer model
     infer_model(opts, logger)
-
-
     
 
 if __name__ == "__main__":

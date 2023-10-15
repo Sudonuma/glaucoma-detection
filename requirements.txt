@@ -9,3 +9,4 @@ tqdm
 glob
 argparse
 pandas
+pytest
