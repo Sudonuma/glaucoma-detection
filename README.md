@@ -12,7 +12,6 @@ Welcome to the Glaucoma Challenge repository. This repository contains the code 
 - [data](#data)
 - [CSV](#CSV)
 - [Explanation](#explanation)
-- [Model](#Model)
 - [Results](#Results)
 - [Improvements](#improvements)
 - [ToDo](#ToDo)
@@ -73,6 +72,7 @@ If you want to train on the balanced data, you can utilize the `reduced_encoded_
 2. To train the model on balanced data (exactly the sample number of samples for each class): `reduced_encoded_train_data.csv` and `reduced_encoded_test_data.csv`
 3. To train the model on Downsampled but not well balanced data use: `13ktrain_data.csv` and `13ktest_data.csv`
 4. `dummy_train_data.csv` and `dummy_test_data.csv` are just for the purpose to run the code.
+
 
 
 

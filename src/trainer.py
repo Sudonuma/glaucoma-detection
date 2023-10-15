@@ -235,7 +235,7 @@ def load_model(model: nn.Module, model_path: str) -> None:
         model (nn.Module): The PyTorch model to load weights into.
         model_path (str): The path to the model weights.
     """
-    state_dict = torch.load(model_path)
+    state_dict = torch.load(model_path, map_location=torch.device('cpu'))
     model.load_state_dict(state_dict)
     model.eval()
 
