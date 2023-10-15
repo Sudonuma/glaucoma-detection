@@ -32,6 +32,18 @@ class NetworkOptions:
                                  type=str,
                                  help="path to the saved model.",
                                  default="./data/dataset/1/TRAIN021661.jpg")
+        
+    
+        self.parser.add_argument("--data_url",
+                                 type=str,
+                                 help="Dataset S3 URL.",
+                                 default="https://glaucoma-dataset-009.s3.eu-central-1.amazonaws.com/data.zip")
+        
+        self.parser.add_argument("--model_url",
+                                 type=str,
+                                 help="Model S3 URL.",
+                                 default="https://glaucoma-dataset-009.s3.eu-central-1.amazonaws.com/model.zip")
+
         # label is 0 
         # self.parser.add_argument("--image_path",
         #                          type=str,

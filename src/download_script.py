@@ -3,14 +3,7 @@ import requests
 import zipfile
 import shutil
 import sys
-import logging
 
-DATA_URL = "https://glaucoma-dataset-009.s3.eu-central-1.amazonaws.com/data.zip"
-MODAL_URL = "https://glaucoma-dataset-009.s3.eu-central-1.amazonaws.com/model.zip"
-
-
-logging.basicConfig(level=logging.INFO, format="%(asctime)s, %(message)s", datefmt='%Y-%m-%d %H:%M:%S')
-logger = logging.getLogger()
 
 def download(url,file_name, logger):
      file_path = './' + file_name
@@ -44,10 +37,10 @@ def setup(url, directory_name, logger):
      download(url, file_name, logger)
 
 
-def download_data(logger): 
-     setup(DATA_URL,'data',logger)
+def download_data(data_url, logger): 
+     setup(data_url,'data',logger)
 
 
-def download_model(logger): 
-     setup(MODAL_URL,'model',logger)
+def download_model(model_url, logger): 
+     setup(model_url,'model',logger)
 
