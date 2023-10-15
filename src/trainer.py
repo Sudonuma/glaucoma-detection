@@ -1,4 +1,4 @@
-from typing import Tuple, List, Union, Dict
+from typing import Tuple, List, Dict
 from torchvision import transforms, models
 from torch.utils.data import DataLoader, Dataset
 import torch
@@ -13,7 +13,6 @@ from torch.utils.data import Subset
 from sklearn.model_selection import train_test_split
 from tqdm import tqdm
 import wandb
-import logging
 from src.data.screenings import ResnetDataset
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, confusion_matrix, roc_curve
 
