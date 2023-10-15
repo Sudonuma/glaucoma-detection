@@ -17,11 +17,7 @@ def main():
         os.makedirs(log_dir)
 
     log_formatter = logging.Formatter("%(asctime)s, %(message)s", datefmt='%Y-%m-%d %H:%M:%S')
-    # Configure logging
-    # logging.basicConfig(
-    #     level=logging.INFO,
-    #     format="%(asctime)s, %(message)s",
-    #     datefmt='%Y-%m-%d %H:%M:%S')
+    
     #Setup File handler
     file_handler = logging.FileHandler('./logs/logs.log')
     file_handler.setFormatter(log_formatter)
