@@ -55,7 +55,8 @@ python main.py
 6. When asked about wandb API key please copy and paste the token I included in the email. Note that the Token will be deleted in 2/3 days, if you need more time please do not hesitate to contact me.
 
 
-> Note : If you would like to only validate and infer on a model you can run this command `python main.py --validate_only True`. it will ask you to download a pretrained model if you want.
+> Note : If you would like to only validate and infer a model you can run this command `python main.py --validate_only True`.
+
 ## Data
 
 The glaucodma dataset contains images categorized into folders labeled from 0 to 5. These folders include photographs of patients, some of whom have glaucoma, while others do not. Notably, the number of images of individuals without glaucoma significantly surpasses those with the condition.
