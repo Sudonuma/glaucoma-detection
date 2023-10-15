@@ -40,16 +40,25 @@ def main():
     options = NetworkOptions()
     opts = options.parse()
 
+    if opts.validate_only:
+        # Download or not model
+        logger.info(f'Validation and Inference only mode:')
+        user_input = input(f"Do you want to download model a different model. (your current model will be DELETED) (yes/no)? ").strip().lower()
+        if user_input == "yes":
+            download_model(opts.model_url, logger)
+
+        # Evaluate model
+        validate(opts, logger)
+
+        # Infer model
+        infer_model(opts, logger)
+        return
+    
     # Download data
     download_data(opts.data_url, logger)
 
     # Train model
     train(opts, logger)
-
-    # Download or not model
-    user_input = input(f"Do you want to download model a different model. (your current model will be DELETED) (yes/no)? ").strip().lower()
-    if user_input == "yes":
-        download_model(opts.model_url, logger)
 
     # Evaluate model
     validate(opts, logger)

@@ -63,6 +63,11 @@ class NetworkOptions:
                                  type=int,
                                  help="number of epochs",
                                  default=2)
+        
+        self.parser.add_argument("--validate_only",
+                                 type=bool,
+                                 help="Validate and infer on existing model",
+                                 default=False)
 
     def parse(self):
         self.options = self.parser.parse_args()
