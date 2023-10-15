@@ -57,7 +57,7 @@ In a separate experiment, we aimed to mitigate class imbalance by reducing the d
 
 Additionally, to facilitate code testing for other users, we included two CSV files, namely, `dummy_train_data.csv` and `dummy_test_data.csv`. These files enable users to test the code without the need to download the entire 50+GB dataset.
 
-** Should you wish to train on the full dataset, you can do so by copying the image folders (0 to 5) into the `data/dataset` directory. Make sure to adjust the `--data_csv_path` argument to point to `./data/dataset/encoded_train_dataset.csv` and the `--test_data_csv_path` to `./data/dataset/encoded_test_dataset.csv`.**
+**Should you wish to train on the full dataset, you can do so by copying the image folders (0 to 5) into the `data/dataset` directory. Make sure to adjust the `--data_csv_path` argument to point to `./data/dataset/encoded_train_dataset.csv` and the `--test_data_csv_path` to `./data/dataset/encoded_test_dataset.csv`.**
 
 If you want to train on the balanced data, you can utilize the `reduced_encoded_train_data.csv` and `reduced_encoded_test_data.csv` files.
 
