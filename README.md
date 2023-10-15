@@ -10,7 +10,10 @@ Welcome to the Glaucoma Challenge repository. This repository contains the code 
 - [Prerequisites](#prerequisites)
 - [Usage](#usage)
 - [data](#data)
+- [CSV](#CSV)
 - [Explanation](#explanation)
+- [Model](#Model)
+- [Results](#Results)
 - [Improvements](#improvements)
 - [ToDo](#ToDo)
 
@@ -46,6 +49,35 @@ python main.py
 ```
 
 5. When asked about wandb API key please copy and paste the token I included in the email. Note that the Token will be deleted in 2/3 days, if you need more time please do not hesitate to contact me.
+
+## Data
+
+The glaucoma dataset contains images categorized into folders labeled from 0 to 5. These folders include photographs of patients, some of whom have glaucoma, while others do not. Notably, the number of images of individuals without glaucoma significantly surpasses those with the condition.
+
+The dataset is accompanied by a train_labels.csv file, which maps each image's name to its corresponding label. To simplify the labels, we encoded them as follows: "rg" represents class 1, and "ngr" corresponds to class 0. The resulting dataset with these encoded labels is saved in a file called encoded_dataset.csv.
+
+For our experimentation, we set aside a portion (10%) of the data as a test dataset, and the information for these test samples is stored in a CSV file called `test_data.csv`.
+
+In a separate experiment, we aimed to mitigate class imbalance by reducing the dataset size. We generated two distinct files: `reduced_encoded_train_data.csv` for training and `reduced_encoded_test_data.csv` for testing.
+
+Additionally, to facilitate code testing for other users, we included two CSV files, namely, `dummy_train_data.csv` and `dummy_test_data.csv`. These files enable users to test the code without the need to download the entire 50+GB dataset.
+
+Should you wish to train on the full dataset, you can do so by copying the image folders (0 to 5) into the `data/dataset directory`. Make sure to adjust the `--data_csv_path` argument to point to `./data/dataset/encoded_train_dataset.csv` and the `--test_data_csv_path` to `./data/dataset/encoded_test_dataset.csv`.
+
+If you want to train on the balanced data, you can utilize the `reduced_encoded_train_data.csv` and `reduced_encoded_test_data.csv` files.
+
+
+## CSV
+
+1. To train the model on all the dataset use: `train_data.csv` and `test_data.csv`
+2. To train the model on balanced data (exactly the sample number of samples for each class): `reduced_encoded_train_data.csv` and `reduced_encoded_test_data.csv`
+3. To train the model on Downsampled but not well balanced data use: `13ktrain_data.csv` and `13ktest_data.csv`
+4. `dummy_train_data.csv` and `dummy_test_data.csv` are just for the purpose to run the code.
+
+
+
+
+
 
 
 
