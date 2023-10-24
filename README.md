@@ -1,6 +1,6 @@
 # Glaucoma Challenge
 
-Welcome to the Glaucoma Challenge repository. This repository contains the code for the Glaucoma Challenge project.
+Welcome to the Glaucoma detection repository.
 
 ![Ohne Titel](https://user-images.githubusercontent.com/2522480/149497318-fe47c02c-696a-4cb5-8841-2dbe6785029d.png)
 
