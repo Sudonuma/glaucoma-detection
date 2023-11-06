@@ -1,5 +1,6 @@
 from src.trainer import Trainer
 
+
 def train(options, logger) -> None:
     """
     Main function for training a glaucoma detection model.
@@ -10,9 +11,5 @@ def train(options, logger) -> None:
         None
     """
 
-    
     trainer = Trainer(options, logger)
     trainer.train()
-
-if __name__ == "__main__":
-    train()

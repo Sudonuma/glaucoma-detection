@@ -1,14 +1,20 @@
+import logging
 
 import pytest
-from src.options import NetworkOptions
-import logging
+
 import wandb
+from src.options import NetworkOptions
 
 wandb.init(project="glaucoma", entity="sudonuma")
 
+
 @pytest.fixture
 def logger():
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s, %(message)s",datefmt='%Y-%m-%d %H:%M:%S')
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s, %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+    )
     logger = logging.getLogger()
     return logger
 

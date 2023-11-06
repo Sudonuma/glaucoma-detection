@@ -1,11 +1,13 @@
-from src.train import train
 import logging
 import os
+
 import wandb
-from src.options import NetworkOptions
 from src.download_script import download_data, download_model
-from src.validate_model import validate
+from src.options import NetworkOptions
+from src.train import train
 from src.trainer import infer_model
+from src.validate_model import validate
+
 
 def main():
     # initialize wandb
@@ -16,10 +18,12 @@ def main():
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
 
-    log_formatter = logging.Formatter("%(asctime)s, %(message)s", datefmt='%Y-%m-%d %H:%M:%S')
-    
+    log_formatter = logging.Formatter(
+        "%(asctime)s, %(message)s", datefmt="%Y-%m-%d %H:%M:%S"
+    )
+
     # Setup File handler
-    file_handler = logging.FileHandler('./logs/logs.log')
+    file_handler = logging.FileHandler("./logs/logs.log")
     file_handler.setFormatter(log_formatter)
     file_handler.setLevel(logging.INFO)
 
@@ -42,8 +46,14 @@ def main():
 
     if opts.validate_only:
         # Download or not model
-        logger.info(f'Validation and Inference only mode:')
-        user_input = input(f"Do you want to download model a different model. (your current model will be DELETED) (yes/no)? ").strip().lower()
+        logger.info("Validation and Inference only mode:")
+        user_input = (
+            input(
+                "Do you want to download model a different model. (your current model will be DELETED) (yes/no)? "
+            )
+            .strip()
+            .lower()
+        )
         if user_input == "yes":
             download_model(opts.model_url, logger)
 
@@ -53,7 +63,7 @@ def main():
         # Infer model
         infer_model(opts, logger)
         return
-    
+
     # Download data
     download_data(opts.data_url, logger)
 
@@ -65,7 +75,7 @@ def main():
 
     # Infer model
     infer_model(opts, logger)
-    
+
 
 if __name__ == "__main__":
-    main()  
+    main()

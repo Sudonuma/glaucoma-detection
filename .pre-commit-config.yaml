@@ -1,0 +1,41 @@
+repos:
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v0.800
+    hooks:
+      - id: mypy
+        args: [--no-strict-optional, --ignore-missing-imports]
+        
+  - repo: local
+    hooks:
+
+      - id: black
+        name: black
+        entry: black
+        language: system
+        types: [ python ]
+        # args: ['--skip-string-normalization']
+        
+        
+      - id: isort
+        name: isort
+        entry: isort
+        language: system
+        types: [ python ]
+        args: ["--profile", "black", "--filter-files"]
+        
+      - id: flake8
+        name: flake8
+        entry: flake8
+        language: system
+        types: [ python ]
+        args: ['--max-line-length', '140']
+        
+      - id: pytest
+        name: pytest
+        entry: pytest
+        language: system
+        types: [python]
+        args: []
+        pass_filenames: false
+        always_run: true
+       

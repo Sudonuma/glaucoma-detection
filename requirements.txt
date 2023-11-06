@@ -8,3 +8,6 @@ tqdm
 argparse
 pandas
 pytest
+pre-commit
+flake8
+isort

@@ -1,7 +1,8 @@
-from PIL import Image
-import pandas as pd
-from torch.utils.data import Dataset
 import glob
+
+import pandas as pd
+from PIL import Image
+from torch.utils.data import Dataset
 
 
 def pil_loader(path: str) -> Image:
@@ -14,9 +15,10 @@ def pil_loader(path: str) -> Image:
     Returns:
         Image: A PIL Image in RGB format.
     """
-    with open(path, 'rb') as f:
+    with open(path, "rb") as f:
         with Image.open(f) as img:
-            return img.convert('RGB')
+            return img.convert("RGB")
+
 
 class ResnetDataset(Dataset):
     def __init__(self, root_dir: str, csv_file: str, transform=None):
@@ -55,8 +57,8 @@ class ResnetDataset(Dataset):
             tuple: A tuple containing the image and label.
         """
         img_name = self.df.iloc[idx, 0]
-        file_path = glob.glob(f'{self.root_dir}/**/{img_name}.jpg', recursive=True)
-        
+        file_path = glob.glob(f"{self.root_dir}/**/{img_name}.jpg", recursive=True)
+
         image = pil_loader(file_path[0])
         label = self.df.iloc[idx, 1]
 
