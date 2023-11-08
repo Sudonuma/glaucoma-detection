@@ -9,8 +9,8 @@ on:
   pull_request:
     branches: [ "main" ]
 
-env:
-  WANDB_API: ${{ secrets.WANDB_KEY }}
+# env:
+#   WANDB_API: ${{ secrets.WANDB_KEY }}
 
 jobs:
   build:
@@ -62,13 +62,11 @@ jobs:
       run: wandb status
     - name: Debug Environment Variable
       shell: bash
-      run: echo $WANDB_API
+      run: echo ${{ secrets.WANDB_API_KEY }}
     
     - name: Loging W&B
       shell: bash
-      env:
-        WANDB_API: ${{ secrets.WANDB_KEY }}
-      run: wandb login "$WANDB_API"
+      run: wandb login ${{ secrets.WANDB_API_KEY }}
     # - name: Loging W&B
     #   run: |
     #     wandb login ${{ secrets.WANDB_API_KEY }}
