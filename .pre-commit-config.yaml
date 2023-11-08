@@ -37,5 +37,5 @@ repos:
         types: [python]
         args: []
         pass_filenames: false
-        always_run: true
+        always_run: False
        
