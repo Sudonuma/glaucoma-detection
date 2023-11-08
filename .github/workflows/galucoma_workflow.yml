@@ -62,7 +62,8 @@ jobs:
     - name: Debug Environment Variable
       run: echo $WANDB_API_KEY
     
-    - name: Loging W&B
+    - name: Loging W&B\
+      shell: bash
       run: |
         wandb login $WANDB_API_KEY
     # - name: Loging W&B
