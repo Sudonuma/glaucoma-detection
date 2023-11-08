@@ -5,7 +5,7 @@ import pytest
 import wandb
 from src.options import NetworkOptions
 
-wandb.init(project="glaucoma", entity="sudonuma")
+wandb.init(project="glaucoma-detection", entity="sudonuma")
 
 
 @pytest.fixture
