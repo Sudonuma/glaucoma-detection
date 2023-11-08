@@ -16,7 +16,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    # environment: env
+    environment: env
     strategy:
       fail-fast: false
       matrix:
