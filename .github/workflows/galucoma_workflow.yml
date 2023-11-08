@@ -64,9 +64,16 @@ jobs:
       shell: bash
       run: echo ${{ secrets.WANDB_API_KEY }}
     
+    # - name: Loging W&B
+    #   shell: bash
+    #   run: wandb login ${{ secrets.WANDB_API_KEY }}
+
     - name: Loging W&B
       shell: bash
-      run: wandb login ${{ secrets.WANDB_API_KEY }}
+      env:
+        WANDB_API: ${{ secrets.WANDB_API_KEY }}
+      run: wandb login "$WANDB_API"
+
     # - name: Loging W&B
     #   run: |
     #     wandb login ${{ secrets.WANDB_API_KEY }}
