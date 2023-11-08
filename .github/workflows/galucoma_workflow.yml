@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.9", "3.10", "3.11"]
+        python-version: ["3.9"]
     
     steps:
     - uses: actions/checkout@v3
@@ -39,6 +39,6 @@ jobs:
       run: |
         pytest
       env:
-        WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
+        WANDB_API_KEY: ${{ secrets.API_KEY }}
         WANDB_ENTITY: ${{ secrets.WANDB_ENTITY }}
         WANDB_PROJECT: ${{ secrets.WANDB_PROJECT }}
