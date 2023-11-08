@@ -58,12 +58,14 @@ jobs:
     #     WANDB_CONSOLE: off
     #     WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
     - name: Debug WandB Config
+      shell: pwsh
       run: wandb status
     - name: Debug Environment Variable
+      shell: pwsh
       run: echo $WANDB_API_KEY
     
     - name: Loging W&B
-      shell: bash
+      shell: pwsh
       run: |
         wandb login $WANDB_API_KEY
     # - name: Loging W&B
