@@ -40,7 +40,7 @@ jobs:
       shell: bash
       env:
         WANDB_API: ${{ secrets.WANDB_API_KEY }}
-      run: wandb login "$WANDB_API_KEY"    
+      run: wandb login "$WANDB_API"    
 
         
     - name: Report WandB Results
