@@ -40,6 +40,7 @@ jobs:
       uses: bencevans/wandb-action@v1
       env:
         # GITHUB_TOKEN: ${{ github.token }}
+        WANDB_MODE: offline
         WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
     
     - name: Test with pytest
@@ -47,5 +48,6 @@ jobs:
         pytest
       env:
         WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
+        WANDB_MODE: offline
         WANDB_ENTITY: ${{ secrets.WANDB_ENTITY }}
         WANDB_PROJECT: ${{ secrets.WANDB_PROJECT }}
