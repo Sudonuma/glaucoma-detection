@@ -265,7 +265,7 @@ def evaluate_model(options, logger) -> Tuple[float, float, float, float, float]:
         Tuple[float, float, float, float, float]:
         A tuple containing accuracy, precision, recall, F1 score, and AUC score.
     """
-
+    # the path for dataset
     data_path = options.data_path
     test_data_csv_path = options.test_data_csv_path
     model_path = options.model_path
