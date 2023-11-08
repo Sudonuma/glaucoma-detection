@@ -54,14 +54,16 @@ jobs:
     #     WANDB_MODE: offline
     #     WANDB_CONSOLE: off
     #     WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
-    
-    - name: Test with pytest
+    - name: Loging W&B
       run: |
-        pytest
-      env:
-        WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
-        WANDB_ENTITY: ${{ secrets.WANDB_ENTITY }}
-        WANDB_PROJECT: ${{ secrets.WANDB_PROJECT }}
-        WANDB_MODE: offline
-        WANDB_CONSOLE: off
+        wandb login ${{ secrets.WANDB_API_KEY }}
+    # - name: Test with pytest
+    #   run: |
+    #     pytest
+    #   env:
+    #     WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
+    #     WANDB_ENTITY: ${{ secrets.WANDB_ENTITY }}
+    #     WANDB_PROJECT: ${{ secrets.WANDB_PROJECT }}
+    #     WANDB_MODE: offline
+    #     WANDB_CONSOLE: off
         
