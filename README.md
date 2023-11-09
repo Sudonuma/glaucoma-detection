@@ -52,9 +52,6 @@ pip install -r requirements.txt
 python main.py
 ```
 
-6. When asked about wandb API key please copy and paste the token I included in the email. Note that the Token will be deleted in 2/3 days, if you need more time please do not hesitate to contact me.
-
-
 > Note : If you would like to only validate and infer a model you can run this command `python main.py --validate_only True`.
 
 ## Data
