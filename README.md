@@ -87,4 +87,3 @@ The data is split 70% for training, 20% validation and 10% for model evaluation 
 4. Add more tests.
 5. Optimise the stratfied sampling.
 6. Use Siamese Neural Networks as it is robust against unbalanced.
-7. Lint.
