@@ -49,7 +49,7 @@ def main():
         logger.info("Validation and Inference only mode:")
         user_input = (
             input(
-                "Do you want to download model a different model. (your current model will be DELETED) (yes/no)? "
+                "Do you want to download a different model. (your current model will be DELETED) (yes/no)? "
             )
             .strip()
             .lower()
