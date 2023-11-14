@@ -1,0 +1,12 @@
+name: download_data
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - requests=2.24.0
+  - google-cloud-sdk
+  - pip=20.3.3
+  - google-cloud-storage
+  - pip:
+      - numpy==1.23.5
+      - wandb==0.10.21

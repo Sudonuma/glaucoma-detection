@@ -1,0 +1,6 @@
+main:
+  project_name: glaucoma-detection
+  experiment_name: dev
+data:
+  bucket_name: glaucoma-dataset
+  source_blob_name: data.zip
