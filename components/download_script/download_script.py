@@ -6,6 +6,7 @@ import zipfile
 
 from google.cloud import storage
 
+# TODO change download script to one script
 logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
 logger = logging.getLogger()
 
@@ -28,7 +29,9 @@ def download(bucket_name, source_blob_name, logger):
 
 def setup(bucket_name, source_blob_name, logger):
     directory_name = os.path.splitext(source_blob_name)[0]
-    dir_name = os.path.dirname(os.path.dirname(os.path.dirname(__file__))) + "/data"
+    dir_name = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.dirname(__file__))), directory_name
+    )
     path = dir_name
     if os.path.exists(path):
         if directory_name == "model":

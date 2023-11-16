@@ -4,3 +4,5 @@ main:
 data:
   bucket_name: glaucoma-dataset
   source_blob_name: data.zip
+  url: https://storage.googleapis.com/glaucoma-dataset/data.zip
+  dir_name: data
