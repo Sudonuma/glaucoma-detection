@@ -1,0 +1,69 @@
+name: train_model
+conda_env: conda.yml
+
+entry_points:
+  main:
+    parameters:
+
+      data_path:
+        description: Path to the dataset.
+        type: string
+
+      data_csv_path:
+        description: Path to csv file that includes the images names.
+        type: string
+
+      test_data_csv_path:
+        description: Path for the csv file of the test data.
+        type: string
+        default: ./data/dataset/dummy_test_data.csv
+ 
+      model_path:
+        description: Path to saved model.
+        type: string
+        default: ./model/modelWeights.pth
+
+      image_path:
+        description: Path to test image.
+        type: string
+        default: ./model/modelWeights.pth
+
+      data_url:
+        description: Dataset CS URL.
+        type: string
+        default: https://storage.googleapis.com/glaucoma-dataset/data.zip
+
+      model_url:
+        description: Model CS URL.
+        type: string
+        default: https://storage.googleapis.com/glaucoma-dataset/model.zip
+
+      batch_size:
+        description: batch_size.
+        type: int
+
+      lr:
+        description: learning rate.
+        type: float
+        # default: 0.01
+        
+      num_epochs:
+        description: number of epochs.
+        type: int
+
+      validate_only:
+        description: Validate and infer on existing model.
+        type: bool
+        default: False
+
+    command: >-
+      python train.py --data_path {data_path} \
+                    --data_csv_path {data_csv_path} \
+                    --test_data_csv_path {test_data_csv_path} \
+                    --model_path {model_path} \
+                    --image_path {image_path} \
+                    --data_url {data_url} \
+                    --batch_size {batch_size} \
+                    --lr {lr} \
+                    --num_epochs {num_epochs} \
+                    --validate_only {validate_only} \

@@ -4,8 +4,8 @@ import os
 import wandb
 from src.download_script import download_data, download_model
 from src.options import NetworkOptions
-from src.train import train
-from src.trainer import infer_model
+from src.train_model.train import train
+from src.train_model.trainer import infer_model
 from src.validate_model import validate
 
 

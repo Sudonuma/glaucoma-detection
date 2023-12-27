@@ -1,4 +1,4 @@
-from src.trainer import evaluate_model
+from src.train_model.trainer import evaluate_model
 
 
 def validate(options, logger) -> None:
