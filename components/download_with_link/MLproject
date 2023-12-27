@@ -1,0 +1,20 @@
+name: download_data_model
+conda_env: conda.yml
+
+entry_points:
+  main:
+    parameters:
+      # file_url:
+      #     description: URL of data to download (has to be .zip).
+      #     type: uri
+      url:
+        description: Bucket name in GS that has the data to download.
+        type: uri
+        default: https://storage.googleapis.com/glaucoma-dataset/data.zip
+      dir_name:
+        description: The name of the local directory for data/ model.
+        type: str
+        default: data
+
+    command: >-
+      python download_with_link.py --url {url} --dir_name {dir_name}

@@ -2,7 +2,6 @@ import os
 from time import sleep
 from typing import Dict, List, Tuple
 
-import numpy as np
 import torch
 import torch.nn as nn
 from PIL import Image
@@ -14,16 +13,19 @@ from sklearn.metrics import (
     roc_auc_score,
     roc_curve,
 )
-from sklearn.model_selection import StratifiedShuffleSplit, train_test_split
+from sklearn.model_selection import train_test_split
 from torch import optim
 from torch.utils.data import DataLoader, Dataset, Subset
 from torchvision import models, transforms
 from tqdm import tqdm
 
 import wandb
+
+# from screenings import ResnetDataset
 from src.data.screenings import ResnetDataset
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# change this with logger
 print(device)
 
 
@@ -46,50 +48,6 @@ def not_stratified_train_val_dataset(
     datasets = {}
     datasets["train"] = Subset(dataset, train_idx)
     datasets["val"] = Subset(dataset, val_idx)
-    return datasets
-
-
-def train_val_dataset(
-    dataset: Dataset,
-    train_ratio: float = 0.7,
-    val_ratio: float = 0.2,
-    test_ratio: float = 0.1,
-    random_state: int = 42,
-) -> Dict[str, Dataset]:
-    """
-    Split a dataset into training and validation sets with stratified sampling.
-
-    Args:
-        dataset (Dataset): The dataset to split.
-        train_ratio (float): The fraction of data to put in the training set.
-        val_ratio (float): The fraction of data to put in the validation set.
-        test_ratio (float): The fraction of data to put in the test set.
-        random_state (int): The random seed for reproducibility.
-
-    Returns:
-        dict: A dictionary with 'train' and 'val' keys, containing training and validation subsets.
-    """
-
-    # labels = [dataset[i][1] for i in range(len(dataset))]
-    print("start stratifying 0")
-    data_array = np.array(dataset)
-
-    # extract the labels
-    labels = data_array[:, 1]
-    print("start stratifying 1")
-
-    splitter = StratifiedShuffleSplit(
-        n_splits=1, test_size=val_ratio, random_state=random_state
-    )
-    print("start stratifying 2")
-    train_idx, temp_idx = next(splitter.split(labels, labels))
-    print("ending datasplit")
-
-    train_subset = Subset(dataset, train_idx)
-    val_subset = Subset(dataset, temp_idx)
-
-    datasets = {"train": train_subset, "val": val_subset}
-
     return datasets
 
 

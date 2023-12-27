@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from src.trainer import evaluate_model
+from src.train_model.trainer import evaluate_model
 
 IN_GITHUB_ACTIONS = os.getenv("GITHUB_ACTIONS") == "true"
 

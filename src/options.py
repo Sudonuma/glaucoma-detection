@@ -46,15 +46,15 @@ class NetworkOptions:
         self.parser.add_argument(
             "--data_url",
             type=str,
-            help="Dataset S3 URL.",
-            default="https://glaucoma-dataset-009.s3.eu-central-1.amazonaws.com/data.zip",
+            help="Dataset CS URL.",
+            default="https://storage.googleapis.com/glaucoma-dataset/data.zip",
         )
 
         self.parser.add_argument(
             "--model_url",
             type=str,
-            help="Model S3 URL.",
-            default="https://glaucoma-dataset-009.s3.eu-central-1.amazonaws.com/model.zip",
+            help="Model CS URL.",
+            default="https://storage.googleapis.com/glaucoma-dataset/model.zip",
         )
 
         # label is 0

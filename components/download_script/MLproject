@@ -1,0 +1,20 @@
+name: download_data_model
+conda_env: conda.yml
+
+entry_points:
+  main:
+    parameters:
+      # file_url:
+      #     description: URL of data to download (has to be .zip).
+      #     type: uri
+      bucket_name:
+        description: Bucket name in GS that has the data to download.
+        type: str
+        default: glaucoma-dataset
+      source_blob_name:
+        description: The name of the object to download (.zip).
+        type: str
+        default: data.zip
+
+    command: >-
+      python download_script.py --bucket_name {bucket_name} --source_blob_name {source_blob_name}
