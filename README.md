@@ -1,4 +1,4 @@
-# Glaucoma Challenge
+# Glaucoma Detection
 
 Welcome to the Glaucoma detection repository.
 
