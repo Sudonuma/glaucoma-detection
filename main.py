@@ -6,7 +6,7 @@ import mlflow
 from omegaconf import DictConfig
 
 
-# This automatically reads in the configuration
+# Read hydra config
 @hydra.main(config_name="config")
 def go(config: DictConfig):
     root_dir = os.path.dirname(os.path.abspath(__file__))
@@ -17,7 +17,6 @@ def go(config: DictConfig):
     os.environ["WANDB_PROJECT"] = config["main"]["project_name"]
     os.environ["WANDB_RUN_GROUP"] = config["main"]["experiment_name"]
 
-    # You can get the path at the root of the MLflow project with this:
     # TODO use this to fix saving data
     root_path = hydra.utils.get_original_cwd()
 
@@ -58,5 +57,4 @@ def go(config: DictConfig):
 
 
 if __name__ == "__main__":
-    # wandb.init(project="glaucoma-detection", entity="sudonuma")
     go()
