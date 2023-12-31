@@ -1,4 +1,5 @@
 import os
+import sys
 from time import sleep
 from typing import Dict, List, Tuple
 
@@ -20,7 +21,19 @@ from torchvision import models, transforms
 from tqdm import tqdm
 
 import wandb
-from src.data.screenings import ResnetDataset
+
+# TODO change the path to glaucoma=detectioninstead of src
+# Get the absolute path of the current file's directory
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Add the root directory to the Python path if not already included
+root_dir = os.path.abspath(os.path.join(current_dir, os.pardir))
+
+# if root_dir not in sys.path:
+sys.path.append(root_dir)
+
+
+from data.screenings import ResnetDataset  # noqa: E402
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # change this with logger

@@ -1,5 +1,4 @@
 import os
-import sys
 
 import hydra
 import mlflow
@@ -9,10 +8,11 @@ from omegaconf import DictConfig
 # Read hydra config
 @hydra.main(config_name="config")
 def go(config: DictConfig):
-    root_dir = os.path.dirname(os.path.abspath(__file__))
-    # Add the root directory to the Python path if not already included
-    if root_dir not in sys.path:
-        sys.path.append(root_dir)
+    # root_dir = os.path.dirname(os.path.abspath(__file__))
+    # # Add the root directory to the Python path if not already included
+    # print(sys.path)
+    # if root_dir not in sys.path:
+    #     sys.path.append(root_dir)
 
     os.environ["WANDB_PROJECT"] = config["main"]["project_name"]
     os.environ["WANDB_RUN_GROUP"] = config["main"]["experiment_name"]
