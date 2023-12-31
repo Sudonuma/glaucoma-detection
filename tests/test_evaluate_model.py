@@ -4,6 +4,9 @@ import pytest
 
 from src.train_model.trainer import evaluate_model
 
+# sys.path.append(os.path.abspath(os.path.join(os.path.pardir, "data")))
+
+
 IN_GITHUB_ACTIONS = os.getenv("GITHUB_ACTIONS") == "true"
 
 

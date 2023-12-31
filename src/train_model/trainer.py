@@ -20,13 +20,13 @@ from torchvision import models, transforms
 from tqdm import tqdm
 
 import wandb
-
-# from screenings import ResnetDataset
 from src.data.screenings import ResnetDataset
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # change this with logger
 print(device)
+
+wandb.init(project="glaucoma-detection", entity="sudonuma")
 
 
 def not_stratified_train_val_dataset(

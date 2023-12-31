@@ -1,17 +1,19 @@
 import os
+import sys
 
 import hydra
 import mlflow
 from omegaconf import DictConfig
 
-import wandb
-
 
 # This automatically reads in the configuration
 @hydra.main(config_name="config")
 def go(config: DictConfig):
-    wandb.init(project="glaucoma-detection", entity="sudonuma")
-    # Setup the wandb experiment. All runs will be grouped under this name
+    root_dir = os.path.dirname(os.path.abspath(__file__))
+    # Add the root directory to the Python path if not already included
+    if root_dir not in sys.path:
+        sys.path.append(root_dir)
+
     os.environ["WANDB_PROJECT"] = config["main"]["project_name"]
     os.environ["WANDB_RUN_GROUP"] = config["main"]["experiment_name"]
 
@@ -46,6 +48,7 @@ def go(config: DictConfig):
             "model_path": config["trainer"]["model_path"],
             "image_path": config["trainer"]["image_path"],
             "data_url": config["trainer"]["data_url"],
+            "model_url": config["trainer"]["model_url"],
             "batch_size": config["trainer"]["batch_size"],
             "lr": config["trainer"]["lr"],
             "num_epochs": config["trainer"]["num_epochs"],
@@ -55,4 +58,5 @@ def go(config: DictConfig):
 
 
 if __name__ == "__main__":
+    # wandb.init(project="glaucoma-detection", entity="sudonuma")
     go()

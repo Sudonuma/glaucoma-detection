@@ -11,4 +11,4 @@ dependencies:
   - google-cloud-storage
   - pip:
       - numpy==1.23.5 
-      - wandb==0.10.21
+      - wandb==0.16.1

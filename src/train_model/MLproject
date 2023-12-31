@@ -66,4 +66,4 @@ entry_points:
                     --batch_size {batch_size} \
                     --lr {lr} \
                     --num_epochs {num_epochs} \
-                    --validate_only {validate_only} \
+                    --validate_only {validate_only}
